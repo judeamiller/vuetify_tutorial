@@ -25,7 +25,7 @@
           rounded
           class="my-2"
         >{{ link.label }}</v-btn>
-        <v-col class="primary lighten-2 py-4 text-center white--text" cols="12">
+        <v-col class="primary lighten-2 py-4 text-center white--text xs12" cols="12">
           {{ new Date().getFullYear() }} —
           <strong>Vuetify Tutorial</strong>
         </v-col>
