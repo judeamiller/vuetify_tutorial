@@ -11,9 +11,19 @@
         <StatCard :stat="stat" />
       </v-col>
     </v-row>
-    <v-snackbar v-model="snackbar">
-      You have selected {{ currentItem }}
-      <v-btn color="pink" text @click="snackbar = false">Close</v-btn>
+    <v-row>
+      <v-col cols="8">
+        <EmployeesTable :employees="employees" @employee-selected="selectEmployee" />
+      </v-col>
+      <v-col cols="4">
+        <EventTimeline :timeline="timeline" />
+      </v-col>
+    </v-row>
+    <v-snackbar v-model="snackbar" :left="$vuetify.breakpoint.lgAndUp">
+      You have selected {{selectedEmployee.name}}, {{selectedEmployee.title}}
+      <v-btn color="pink" text @click="snackbar = false">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
     </v-snackbar>
   </v-container>
 </template>
@@ -40,12 +50,20 @@ export default {
       timeline: timelineData,
       employees: employeesData,
       stats: statisticsData,
-      currentItem: "",
-
-      snackbar: false
+      snackbar: false,
+      selectedEmployee: {
+        name: "",
+        title: ""
+      }
     };
   },
-  methods: {}
+  methods: {
+    selectEmployee(event) {
+      this.snackbar = true;
+      this.selectedEmployee.title = event.title;
+      this.selectedEmployee.name = event.name;
+    }
+  }
 };
 </script>
 
