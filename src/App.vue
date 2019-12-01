@@ -1,16 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app dark color="primary">
-      <v-toolbar-title>Vuetify Tutorial</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        v-for="link in links"
-        :key="`${link.label}-header-link`"
-        text
-        rounded
-        :to="link.url"
-      >{{link.label}}</v-btn>
-    </v-app-bar>
+    <Navbar :links="links" />
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -35,8 +25,10 @@
 </template>
 
 <script>
+import Navbar from "@/components/Navbar.vue";
 export default {
   name: "App",
+  components: { Navbar },
 
   data: () => ({
     links: [
