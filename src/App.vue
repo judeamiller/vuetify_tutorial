@@ -70,7 +70,6 @@ export default {
 
   watch: {
     signedIn(newData) {
-      console.log("newData is", newData);
       if (newData === true) {
         this.links.forEach(element => {
           if (element.label == "Sign Up" || element.label == "Login") {
