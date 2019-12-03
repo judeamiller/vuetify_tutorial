@@ -14,15 +14,17 @@
         :to="link.url"
         :class="{'d-none': !link.show}"
       >{{link.label}}</v-btn>
+      <v-btn text rounded v-if="signedIn" @click="signOut()">Sign Out</v-btn>
     </v-toolbar-items>
     <v-menu>
       <template v-slot:activator="{ on: menu }">
-        <v-app-bar-nav-icon class="hidden-md-and-up" v-on="{ ...tooltip, ...menu }"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon class="hidden-md-and-up" v-on="{ ...menu }"></v-app-bar-nav-icon>
       </template>
       <v-list>
         <v-list-item v-for="(link, index) in links" :key="index" :to="link.url">
           <v-list-item-title>{{ link.label }}</v-list-item-title>
         </v-list-item>
+        <v-list-item v-if="signedIn" @click="signOut()">Sign Out</v-list-item>
       </v-list>
     </v-menu>
   </v-app-bar>
@@ -31,7 +33,22 @@
 <script>
 export default {
   name: "Navbar",
-  props: ["links"]
+  props: ["links"],
+  computed: {
+    signedIn: {
+      get() {
+        return this.$store.getters.signedIn;
+      },
+      set(newValue) {
+        this.$store.commit("setSignedIn", newValue);
+      }
+    }
+  },
+  methods: {
+    signOut() {
+      this.signedIn = false;
+    }
+  }
 };
 </script>
 
