@@ -12,6 +12,7 @@
         text
         rounded
         :to="link.url"
+        :class="{'d-none': !link.show}"
       >{{link.label}}</v-btn>
     </v-toolbar-items>
     <v-menu>
