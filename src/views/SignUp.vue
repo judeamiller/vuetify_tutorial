@@ -16,7 +16,7 @@
         </v-form>
       </v-col>
     </v-row>
-    <v-snackbar v-model="showAlert">
+    <v-snackbar v-model="showAlert" color="pink">
       You picked the ONLY wrong choice. Any other browser will do. May I suggest &nbsp;
       <a
         href="https://www.mozilla.org/en-US/firefox/new"
@@ -45,16 +45,16 @@ export default {
       selectedBrowser: null,
       email: "",
       birthday: "",
-      accept: false
+      accept: false,
+      showAlert: false
     };
   },
-  computed: {
-    showAlert() {
-      if (this.selectedBrowser == "Internet Explorer") {
-        return true;
-      } else {
-        return false;
-      }
+  computed: {},
+  watch: {
+    selectedBrowser(value) {
+      value == "Internet Explorer"
+        ? (this.showAlert = true)
+        : (this.showAlert = false);
     }
   }
 };
